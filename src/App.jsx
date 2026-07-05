@@ -723,6 +723,7 @@ function SubmissionDetail({ submission }) {
       <div style={{ height: 1, background: COLORS.line, margin: "16px 0" }} />
       {IMPORTANCE_ITEMS.map((i) => <DetailRow key={i.id} label={i.label} value={s.importance?.[i.id]} />)}
       <div style={{ height: 1, background: COLORS.line, margin: "16px 0" }} />
+      <DetailRow label="Sound budget range" value={s.investment?.soundBudgetRange} />
       <DetailRow label="Future interest" value={(s.futureInterest || []).join(", ")} />
       <div style={{ height: 1, background: COLORS.line, margin: "16px 0" }} />
       <DetailRow label="Contact name" value={s.contact?.name} />
