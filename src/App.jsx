@@ -80,8 +80,6 @@ function buildQuestions() {
 
   qs.push({ id: "challenges", section: "Challenges", type: "multiselect", label: "Which of these have you experienced?", helper: "Select all that apply.", options: CHALLENGE_OPTIONS, allowOther: true, required: true });
 
-  qs.push({ id: "soundBudgetRange", section: "Investment", type: "select", label: "If we could meaningfully improve the sound and atmosphere of your space, what investment range would feel reasonable to consider?", options: SOUND_BUDGET_RANGES, required: true });
-  
 IMPORTANCE_ITEMS.forEach((item) => {
   qs.push({
     id: item.id,
@@ -93,7 +91,9 @@ IMPORTANCE_ITEMS.forEach((item) => {
     required: true,
   });
 });
-
+  
+  qs.push({ id: "soundBudgetRange", section: "Investment", type: "select", label: "If we could meaningfully improve the sound and atmosphere of your space, what investment range would feel reasonable to consider?", options: SOUND_BUDGET_RANGES, required: true });
+  
   qs.push({ id: "futureInterest", section: "Future Interest", type: "multiselect", label: "Would you like to learn more about any of these?", helper: "Select all that apply.", options: FUTURE_INTEREST_OPTIONS, required: true });
 
   qs.push({ id: "contactName", section: "Contact Information", type: "text", label: "What's your name?", placeholder: "Full name", required: true });
