@@ -43,11 +43,11 @@ const FUTURE_INTEREST_OPTIONS = [
 const PREFERRED_CONTACT = ["Phone call", "Email", "Text message"];
 
 const ENVIRONMENT_ITEMS = [
-  { id: "noiseLevel", label: "Overall noise level", low: "Very noisy", high: "Very quiet" },
-  { id: "easeOfConversation", label: "Ease of conversation", low: "Very difficult", high: "Very easy" },
-  { id: "customerComfort", label: "Customer comfort", low: "Not comfortable", high: "Very comfortable" },
-  { id: "musicQuality", label: "Quality of background music", low: "Poor", high: "Excellent" },
-  { id: "atmosphere", label: "Overall atmosphere", low: "Poor", high: "Excellent" },
+  { id: "noiseLevel", label: "Noise level", question: "How would you describe the noise level in your space?", low: "Very noisy", high: "Very quiet" },
+  { id: "easeOfConversation", label: "Ease of conversation", question: "How easy is it for customers to hold a conversation here?", low: "Very difficult", high: "Very easy" },
+  { id: "customerComfort", label: "Customer comfort", question: "How comfortable do customers seem in your space?", low: "Not comfortable", high: "Very comfortable" },
+  { id: "musicQuality", label: "Music quality", question: "How would you rate the quality of your background music?", low: "Poor", high: "Excellent" },
+  { id: "atmosphere", label: "Overall atmosphere", question: "How would you rate the overall atmosphere of your business?", low: "Poor", high: "Excellent" },
 ];
 
 const IMPORTANCE_ITEMS = [
@@ -66,9 +66,9 @@ function buildQuestions() {
   qs.push({ id: "businessSize", section: "Business Information", type: "select", label: "About how large is your space?", options: BUSINESS_SIZES, required: true });
   qs.push({ id: "employeeCount", section: "Business Information", type: "number", label: "How many employees work here?", placeholder: "e.g. 12", required: true });
 
-  ENVIRONMENT_ITEMS.forEach((item) => {
-    qs.push({ id: item.id, section: "Current Environment", type: "likert", label: `How would you rate: ${item.label}?`, low: item.low, high: item.high, required: true });
-  });
+ ENVIRONMENT_ITEMS.forEach((item) => {
+  qs.push({ id: item.id, section: "Current Environment", type: "likert", label: item.question, low: item.low, high: item.high, required: true });
+});
 
   qs.push({ id: "challenges", section: "Challenges", type: "multiselect", label: "Which of these have you experienced?", helper: "Select all that apply.", options: CHALLENGE_OPTIONS, allowOther: true, required: true });
 
