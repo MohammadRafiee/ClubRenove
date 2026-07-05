@@ -50,12 +50,12 @@ const ENVIRONMENT_ITEMS = [
 ];
 
 const IMPORTANCE_ITEMS = [
-  { id: "betterConversations", label: "Better conversations", question: "How much would it matter if customers could hold conversations more easily?" },
-  { id: "pleasantAtmosphere", label: "Pleasant atmosphere", question: "How much would a more pleasant atmosphere matter to your business?" },
-  { id: "distributedMusic", label: "Even music coverage", question: "How much would it help to have music sound consistent throughout your space?" },
-  { id: "reducedEcho", label: "Reduced echo", question: "How much of a difference would reducing echo make?" },
+  { id: "betterConversations", label: "Easy conversations", question: "How important is it that customers can hold conversations easily in your space?" },
+  { id: "pleasantAtmosphere", label: "Pleasant atmosphere", question: "How important is the overall atmosphere to your business?" },
+  { id: "distributedMusic", label: "Even music coverage", question: "How important is it that music sounds consistent throughout your space?" },
+  { id: "reducedEcho", label: "Minimal echo", question: "How important is it that your space has minimal echo?" },
   { id: "speechClarity", label: "Speech clarity", question: "How important is it that speech comes through clearly in your space?" },
-  { id: "employeeComfort", label: "Employee comfort", question: "How much would improving your employees' comfort matter?" },
+  { id: "employeeComfort", label: "Employee wellbeing impact", question: "How much do you think your employees' wellbeing affects business results — like service quality, retention, or productivity?", low: "No noticeable impact", high: "Major impact" },
 ];
 
 function buildQuestions() {
@@ -71,8 +71,16 @@ function buildQuestions() {
 
   qs.push({ id: "challenges", section: "Challenges", type: "multiselect", label: "Which of these have you experienced?", helper: "Select all that apply.", options: CHALLENGE_OPTIONS, allowOther: true, required: true });
 
- IMPORTANCE_ITEMS.forEach((item) => {
-  qs.push({ id: item.id, section: "Priorities", type: "likert", label: item.question, low: "Not important", high: "Very important", required: true });
+IMPORTANCE_ITEMS.forEach((item) => {
+  qs.push({
+    id: item.id,
+    section: "Priorities",
+    type: "likert",
+    label: item.question,
+    low: item.low || "Not important",
+    high: item.high || "Very important",
+    required: true,
+  });
 });
 
   qs.push({ id: "futureInterest", section: "Future Interest", type: "multiselect", label: "Would you like to learn more about any of these?", helper: "Select all that apply.", options: FUTURE_INTEREST_OPTIONS, required: true });
