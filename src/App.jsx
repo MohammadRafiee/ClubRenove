@@ -58,6 +58,15 @@ const IMPORTANCE_ITEMS = [
   { id: "employeeComfort", label: "Employee wellbeing impact", question: "How much do you think your employees' wellbeing affects business results — like service quality, retention, or productivity?", low: "No noticeable impact", high: "Major impact" },
 ];
 
+const SOUND_BUDGET_RANGES = [
+  "Under $500",
+  "$500 – $2,000",
+  "$2,000 – $5,000",
+  "$5,000 – $15,000",
+  "More than $15,000",
+  "I'd need to know more first",
+];
+
 function buildQuestions() {
   const qs = [];
   qs.push({ id: "businessName", section: "Business Information", type: "text", label: "What's the name of your business?", placeholder: "e.g. The Corner Bistro", required: true });
@@ -71,6 +80,8 @@ function buildQuestions() {
 
   qs.push({ id: "challenges", section: "Challenges", type: "multiselect", label: "Which of these have you experienced?", helper: "Select all that apply.", options: CHALLENGE_OPTIONS, allowOther: true, required: true });
 
+  qs.push({ id: "soundBudgetRange", section: "Investment", type: "select", label: "If we could meaningfully improve the sound and atmosphere of your space, what investment range would feel reasonable to consider?", options: SOUND_BUDGET_RANGES, required: true });
+  
 IMPORTANCE_ITEMS.forEach((item) => {
   qs.push({
     id: item.id,
@@ -134,6 +145,7 @@ function fromRow(row) {
     challengesOther: row.challenges_other || "",
     importance: row.importance || {},
     futureInterest: row.future_interest || [],
+    investment: row.investment || {},
     contact: {
       name: row.contact_name,
       phone: row.contact_phone,
@@ -157,6 +169,7 @@ function toRow(entry) {
     challenges_other: entry.challengesOther,
     importance: entry.importance,
     future_interest: entry.futureInterest,
+    investment: entry.investment,
     contact_name: entry.contact.name,
     contact_phone: entry.contact.phone,
     contact_email: entry.contact.email,
@@ -517,6 +530,9 @@ function buildSubmission(answers, startedAt) {
     challengesOther: answers.challengesOther || "",
     importance: Object.fromEntries(IMPORTANCE_ITEMS.map((i) => [i.id, answers[i.id]])),
     futureInterest: answers.futureInterest || [],
+    investment: {
+    soundBudgetRange: answers.soundBudgetRange || "",
+    },
     contact: {
       name: answers.contactName || "",
       phone: answers.contactPhone || "",
