@@ -28,7 +28,6 @@ const CHALLENGE_OPTIONS = [
   "Music is too quiet",
   "Echo or reverberation",
   "None of these",
-  "Other",
 ];
 
 const FUTURE_INTEREST_OPTIONS = [
@@ -51,12 +50,12 @@ const ENVIRONMENT_ITEMS = [
 ];
 
 const IMPORTANCE_ITEMS = [
-  { id: "betterConversations", label: "Better customer conversations" },
-  { id: "pleasantAtmosphere", label: "A more pleasant atmosphere" },
-  { id: "distributedMusic", label: "Better distributed music" },
-  { id: "reducedEcho", label: "Reduced echo" },
-  { id: "speechClarity", label: "Improved speech clarity" },
-  { id: "employeeComfort", label: "Better employee comfort" },
+  { id: "betterConversations", label: "Better conversations", question: "How much would it matter if customers could hold conversations more easily?" },
+  { id: "pleasantAtmosphere", label: "Pleasant atmosphere", question: "How much would a more pleasant atmosphere matter to your business?" },
+  { id: "distributedMusic", label: "Even music coverage", question: "How much would it help to have music sound consistent throughout your space?" },
+  { id: "reducedEcho", label: "Reduced echo", question: "How much of a difference would reducing echo make?" },
+  { id: "speechClarity", label: "Speech clarity", question: "How important is it that speech comes through clearly in your space?" },
+  { id: "employeeComfort", label: "Employee comfort", question: "How much would improving your employees' comfort matter?" },
 ];
 
 function buildQuestions() {
@@ -72,9 +71,9 @@ function buildQuestions() {
 
   qs.push({ id: "challenges", section: "Challenges", type: "multiselect", label: "Which of these have you experienced?", helper: "Select all that apply.", options: CHALLENGE_OPTIONS, allowOther: true, required: true });
 
-  IMPORTANCE_ITEMS.forEach((item) => {
-    qs.push({ id: item.id, section: "Priorities", type: "likert", label: `How important is: ${item.label}?`, low: "Not important", high: "Very important", required: true });
-  });
+ IMPORTANCE_ITEMS.forEach((item) => {
+  qs.push({ id: item.id, section: "Priorities", type: "likert", label: item.question, low: "Not important", high: "Very important", required: true });
+});
 
   qs.push({ id: "futureInterest", section: "Future Interest", type: "multiselect", label: "Would you like to learn more about any of these?", helper: "Select all that apply.", options: FUTURE_INTEREST_OPTIONS, required: true });
 
